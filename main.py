@@ -235,9 +235,20 @@ estimate which day of the week is the UIC-Halsted trains station least busy
   print('Sunday: ', sunTotal)
 
   #List of all weekdays 
+  strWeekDays = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
   weekdays = [monday,tuesday,wednesday,thursday,friday,saturday,sunday]
+
   x = weekdays
   y = [monTotal, tuesTotal, wedTotal, thursTotal, friTotal, satTotal, sunTotal]
+  ymax = str(max(y))
+  ymin = str(min(y))
+
+  for i in range(1,7):
+    if (str(y[i]) == ymax):
+      maxDay = strWeekDays[i]
+    if (str(y[i]) == ymin):
+      minDay = strWeekDays[i]
+
   f = np.polyfit(x, y, 6)
   F = np.poly1d(f)
 
@@ -245,8 +256,8 @@ estimate which day of the week is the UIC-Halsted trains station least busy
   plt.plot(x, y, 'bo')
 
   print("Prediction for the number of rides on a Wednesday for the UIC-Halsted train station: " + str(wedTotal))
-  print("Estimate for which day of the week is the UIC-Halsted trains station most busy: " + str(max(y)))
-  print("Estimate for which day of the week is the UIC-Halsted trains station least busy: " + str(min(y)))
+  print("Estimate for which day of the week is the UIC-Halsted trains station most busy: " + maxDay)
+  print("Estimate for which day of the week is the UIC-Halsted trains station least busy: " + minDay)
   #Plots data on graph
   plt.plot(x, F(x))
 
